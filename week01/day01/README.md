@@ -10,8 +10,7 @@ backup_logs.sh creates a compressed backup archive of a given directory and keep
 
 ### Example
 ```bash
-./week01/day01/src/scripts/backup_logs.sh ./week01/day01/s
-ample_logs 3
+./week01/day01/src/scripts/backup_logs.sh ./week01/day01/sample_logs 3
 ```
 
 ### Retention Policy
