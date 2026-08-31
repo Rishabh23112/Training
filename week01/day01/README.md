@@ -21,4 +21,4 @@ It keeps the latest N archives and delete the older ones.
 
 ### Example Output
 
-![terminal output](./src/scripts/image.png)
+![terminal output](./src/output/image.png)

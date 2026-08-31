@@ -26,7 +26,7 @@ fi
 # Extract directory name
 DIR_NAME=$(basename "$SOURCE_DIR")
 
-# Create archive directory
+# archive directory
 ARCHIVE_DIR="./week01/day01/archives"
 mkdir -p "$ARCHIVE_DIR"
 
