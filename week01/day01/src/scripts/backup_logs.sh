@@ -27,7 +27,7 @@ fi
 DIR_NAME=$(basename "$SOURCE_DIR")
 
 # Create archive directory
-ARCHIVE_DIR="./archives"
+ARCHIVE_DIR="./week01/day01/archives"
 mkdir -p "$ARCHIVE_DIR"
 
 # Current date
