@@ -5,12 +5,13 @@ backup_logs.sh creates a compressed backup archive of a given directory and keep
 
 ### Usage
 ```bash 
-./scripts/backup_logs.sh <source_directory> <keep_count>
+./week01/day01/scripts/backup_logs.sh <source_directory> <keep_count>
 ```
 
 ### Example
 ```bash
-./scripts/backup_logs.sh ./sample_logs 3
+./week01/day01/src/scripts/backup_logs.sh ./week01/day01/s
+ample_logs 3
 ```
 
 ### Retention Policy
@@ -20,4 +21,4 @@ It keeps the latest N archives and delete the older ones.
 
 ### Example Output
 
-![alt text](image.png)
+![terminal output](./src/scripts/image.png)
