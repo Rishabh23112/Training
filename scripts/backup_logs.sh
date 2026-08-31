@@ -65,6 +65,6 @@ if [ "${#ARCHIVES[@]}" -gt "$KEEP_COUNT" ]; then
 fi
 
 echo
+echo "Backup Summary"
 echo "Created : $ARCHIVE_FILE"
 echo "Deleted : $DELETED_COUNT archive(s)"
-echo "Kept    : $KEEP_COUNT archive(s)"
