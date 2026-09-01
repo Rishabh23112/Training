@@ -35,5 +35,3 @@ def group_by(items: List[Dict], key: str) -> Dict[str, List[Dict]]:
 
         result[value].append(item)
     return result
-
-

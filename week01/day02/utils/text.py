@@ -24,4 +24,5 @@ def count_chars(s: str) -> Dict[str, int]:
     return count
 
 
-
+text_test = "Hello"
+print(count_chars(text_test))
