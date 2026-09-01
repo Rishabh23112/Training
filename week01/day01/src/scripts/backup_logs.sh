@@ -26,8 +26,8 @@ fi
 # Extract directory name
 DIR_NAME=$(basename "$SOURCE_DIR")
 
-# Create archive directory
-ARCHIVE_DIR="./archives"
+# archive directory
+ARCHIVE_DIR="./week01/day01/archives"
 mkdir -p "$ARCHIVE_DIR"
 
 # Current date
@@ -65,6 +65,6 @@ if [ "${#ARCHIVES[@]}" -gt "$KEEP_COUNT" ]; then
 fi
 
 echo
+echo "Backup Summary"
 echo "Created : $ARCHIVE_FILE"
 echo "Deleted : $DELETED_COUNT archive(s)"
-echo "Kept    : $KEEP_COUNT archive(s)"
