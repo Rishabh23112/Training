@@ -24,7 +24,4 @@ def count_chars(s: str) -> Dict[str, int]:
     return count
 
 
-S = " Hello, WORLD!"
-print(clean_text(S))
-print(tokenize(S))
-print(count_chars(S))
+

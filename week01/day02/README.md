@@ -15,5 +15,8 @@
  pylint **/*.py
  ```
 
-### Terminal Output
+### Quality Tools Output
 ![Terminal image](./terminal_Screenshots/quality_tools.png)
+
+### Code Output
+![Code Output](./terminal_Screenshots/code_output.png)

@@ -37,10 +37,3 @@ def group_by(items: List[Dict], key: str) -> Dict[str, List[Dict]]:
     return result
 
 
-S = ["a", "b", "a"]
-
-items_Test = [{"status": "todo", "id": 1}, {"status": "done", "id": 2}]
-
-print(frequencies(S))
-print(dedupe(S))
-print(group_by(items_Test, "status"))
