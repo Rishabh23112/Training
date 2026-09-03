@@ -95,6 +95,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         "--top",
         type=int,
+        default=3,
         help="Number of top rows to display (default: 3)",
     )
 
