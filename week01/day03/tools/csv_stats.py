@@ -90,10 +90,15 @@ def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="CSV Statistics Tool")
     parser.add_argument("--file", required=True, type=str, help="Path to the CSV file")
     parser.add_argument(
-        "--column", required=True, type=str, help="Numeric column to analyze"
+        "--column", 
+        
+        default="price",
+        type=str, 
+        help="Numeric column to analyze"
     )
     parser.add_argument(
         "--top",
+        
         type=int,
         default=3,
         help="Number of top rows to display (default: 3)",
