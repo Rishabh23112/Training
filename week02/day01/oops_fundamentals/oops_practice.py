@@ -119,3 +119,26 @@ class TaskManager:
     def list_pending(self) -> list[Task]:
         """List of pending tasks"""
         return [t for t in self._tasks if t.status != "done"]
+
+
+task1 = Task(
+    title="Learn OOPs",
+    description="Study classes and dataclasses, Inheritance, Encapsulation",
+)
+
+task2 = Task(
+    title="Implementation of learnings.",
+    description="task manager",
+)
+
+manager = TaskManager()
+
+manager.add_task(task1)
+manager.add_task(task2)
+
+task1.transition_to("in_progress")
+
+print("All pending tasks:")
+
+for task in manager.list_pending():
+    print(task)
