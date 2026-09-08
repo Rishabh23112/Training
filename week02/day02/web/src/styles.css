@@ -1,0 +1,107 @@
+
+h1{
+    background-color: black;
+    border-radius: 2vh;
+    color: white;
+    padding-bottom: 1vh;
+    padding-top: 1vh;
+    width: 93%;
+    justify-content: center;
+    display: flex;
+    margin: 2vh auto;
+    align-items: center;
+}
+main{
+    display: flex;
+    gap: 2vh;
+    justify-content: center;
+}
+
+.summary{
+    border: 2px solid black;
+    border-radius: 2vh;
+    background-color: brown;
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: auto;
+
+}
+
+.summary h2{
+    justify-content:center;
+    display: flex;
+}
+
+.summary .loading{
+    padding: 2vh;
+    color: white;
+}
+
+.card{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    
+    
+}
+.card p{
+    text-align: left;
+    min-width: 80px
+}
+
+
+
+@media screen and (max-width:768px){
+    main {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 4%;
+    }
+    .summary{
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        min-height: 35vh;
+    }
+
+    
+}
+
+@media screen and (max-width:425px){
+    main {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 4%;
+    }
+    .summary{
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        min-height: 35vh;
+    }
+    .card{
+        font-size: small;
+        
+    }
+    
+}
+
+
+@media screen and (max-width:1024px){
+    .summary{
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        min-height: 35vh;
+
+    }               
+    .card{
+        font-size: small;
+        
+    }
+    
+}
+
