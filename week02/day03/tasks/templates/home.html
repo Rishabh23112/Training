@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="controls">
+    <label>Status:
+        <select id="statusFilter">
+            <option value="">All</option>
+            <option value="todo">Todo</option>
+            <option value="in_progress">In Progress</option>
+            <option value="done">Done</option>
+        </select>
+    </label>
+</section>
+<section id="messages"></section>
+<section id="list"></section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.App.init();
+    });
+</script>
+{% endblock %}
