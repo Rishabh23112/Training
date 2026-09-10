@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Tasks{% endblock %}
+
+{% block content %}
+<main class="container">
+    <h1>Tasks</h1>
+
+    {% for task in tasks %}
+        <div class="card">
+            <h2>{{ task.title }}</h2>
+            <p>{{ task.description }}</p>
+            <p>Status: {{ task.get_status_display }}</p>
+            <p>Due Date: {{ task.due_date }}</p>
+
+            <div class="card-actions">
+                <a href="{% url 'task-update' task.pk %}" class="link-edit">Edit</a>
+                <a href="{% url 'task-delete' task.pk %}" class="link-delete">Delete</a>
+            </div>
+        </div>
+    {% empty %}
+        <p class="empty-msg">No tasks found</p>
+    {% endfor %}
+
+    {% if is_paginated %}
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+
+            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Next</a>
+            {% endif %}
+        </div>
+    {% endif %}
+</main>
+{% endblock %}
