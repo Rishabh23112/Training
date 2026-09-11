@@ -1,0 +1,34 @@
+{% extends "tasks/base.html" %}
+
+{% block title %}
+
+    {% if object %}
+        Edit Task
+    {%else%}
+        Create Task
+    {%endif%}
+
+{% endblock %}
+
+{% block content %}
+
+<main class="container">
+    <h1>
+        {% if object %}Edit Task {% else %} Create Task {% endif %}
+    </h1>
+
+    <form method="post">
+        {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div class="errorlist">
+                    {{form.non_field_errors}}
+                </div>
+            {% endif %}
+        {{form.as_p}}
+
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'task-list' %}">Cacel</a>
+</main>
+
+{% endblock %}
