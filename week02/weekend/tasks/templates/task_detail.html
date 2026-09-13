@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}{{ task.title }}{% endblock %}
+
+{% block content %}
+
+<div class="task-card">
+
+    <h1>{{ task.title }}</h1>
+
+    <p>
+        <strong>Status:</strong>
+        {{ task.get_status_display }}
+    </p>
+
+    <p>
+        <strong>Description:</strong>
+    </p>
+
+    <p>
+        {{ task.description|default:"No description provided." }}
+    </p>
+
+    <p>
+        <strong>Due date:</strong>
+        {{ task.due_date|default:"No due date" }}
+    </p>
+
+    <p>
+        <strong>Created:</strong>
+        {{ task.created_at }}
+    </p>
+
+    <p>
+        <strong>Updated:</strong>
+        {{ task.updated_at }}
+    </p>
+
+    <div class="actions">
+
+        <a
+            href="{% url 'task-edit' task.pk %}"
+            class="button"
+        >
+            Edit
+        </a>
+
+        <a
+            href="{% url 'task-delete' task.pk %}"
+            class="button danger"
+        >
+            Delete
+        </a>
+
+        <a
+            href="{% url 'task-list' %}"
+            class="button secondary"
+        >
+            Back
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

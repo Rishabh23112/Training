@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %}Tasks{% endblock %}
+
+{% block content %}
+
+<h1>Tasks</h1>
+
+<form method="get" class="filter-form">
+
+    <input
+        type="text"
+        name="q"
+        placeholder="Search by title..."
+        value="{{ request.GET.q }}"
+    >
+
+    <input
+        type="date"
+        name="due_before"
+        value="{{ request.GET.due_before }}"
+    >
+
+    <button type="submit" class="button">
+        Search
+    </button>
+
+    <a href="{% url 'task-list' %}" class="button secondary">
+        Clear
+    </a>
+
+</form>
+
+{% if tasks %}
+
+<div class="task-grid">
+
+    {% for task in tasks %}
+
+    <div class="task-card">
+
+        <h2>
+            <a href="{% url 'task-detail' task.pk %}">
+                {{ task.title }}
+            </a>
+        </h2>
+
+        <p>
+            {{ task.description|truncatewords:20 }}
+        </p>
+
+        <span class="status">
+            {{ task.get_status_display }}
+        </span>
+
+        {% if task.due_date %}
+            <p>
+                Due: {{ task.due_date }}
+            </p>
+        {% else %}
+            <p>
+                No due date
+            </p>
+        {% endif %}
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% else %}
+
+<p>No tasks found.</p>
+
+{% endif %}
+
+
+{% if is_paginated %}
+
+<div class="pagination">
+
+    {% if page_obj.has_previous %}
+        <a
+            href="?q={{ request.GET.q }}&due_before={{ request.GET.due_before }}&page={{ page_obj.previous_page_number }}"
+        >
+            Previous
+        </a>
+    {% endif %}
+
+    <span>
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+        <a
+            href="?q={{ request.GET.q }}&due_before={{ request.GET.due_before }}&page={{ page_obj.next_page_number }}"
+        >
+            Next
+        </a>
+    {% endif %}
+
+</div>
+
+{% endif %}
+
+{% endblock %}
