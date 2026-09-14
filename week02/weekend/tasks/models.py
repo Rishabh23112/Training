@@ -2,7 +2,7 @@
 from django.utils import timezone
 
 from django.db import models
-from pydantic import ValidationError
+from django.core.exceptions import ValidationError
 
 
 
@@ -17,7 +17,7 @@ class Task(models.Model):
     status = models.CharField(
         max_length=20, choices=Status.choices, default=Status.TODO
     )
-    due_date = models.DateTimeField(blank=True, null=True)
+    due_date = models.DateField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
