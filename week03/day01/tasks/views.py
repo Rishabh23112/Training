@@ -1,11 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
-from django.views.generic.edit import FormMixin
 
 from .forms import TaskForm
 from .models import Task
@@ -62,21 +61,14 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
 
-class TaskDeleteView(LoginRequiredMixin, DeleteView):
+class TaskDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Task
     template_name = "task_delete.html"
     success_url = reverse_lazy("task-list")
+    success_message = "Task deleted successfully."
 
     def get_queryset(self):
         return Task.objects.filter(owner=self.request.user)
-
-    def form_valid(self, form: BaseModelForm) -> HttpResponse:
-        messages.success(
-            self.request,
-            "Task deleted successfully.",
-        )
-
-        return super().form_valid(form)
 
 
 # Create your views here.
