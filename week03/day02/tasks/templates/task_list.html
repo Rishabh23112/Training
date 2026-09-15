@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h2>Tasks</h2>
+        <a href="{% url 'task-create' %}" class="btn btn-primary">+ Create New Task</a>
+    </div>
+    <hr>
+
+    {% for task in tasks %}
+        <div class="task-card">
+        <h3>
+            {{ task.title }}
+            <span class="status-badge">{{ task.get_status_display }}</span>
+        </h3>
+        <p>{{ task.description|default:"No description provided." }}</p>
+        <small>Due Date: {{ task.due_date|default:"None" }}</small>
+        <div class="task-actions">
+            <a href="{% url 'task-edit' task.pk %}">Edit</a> |
+            <a href="{% url 'task-delete' task.pk %}">Delete</a>
+        </div>
+        </div>
+    {% empty %}
+        <p>No tasks found. Create one!!</p>
+    {% endfor %}
+
+
+{% if is_paginated %}
+
+    <div class="pagination">
+
+        {% if page_obj.has_previous %}
+
+            <a
+                href="?page={{ page_obj.previous_page_number }}"
+            >
+                Previous
+            </a>
+
+        {% endif %}
+
+
+        <span>
+            Page {{ page_obj.number }}
+            of {{ page_obj.paginator.num_pages }}
+        </span>
+
+
+        {% if page_obj.has_next %}
+
+            <a
+                href="?page={{ page_obj.next_page_number }}"
+            >
+                Next
+            </a>
+
+        {% endif %}
+
+    </div>
+
+{% endif %}
+
+{% endblock %}
