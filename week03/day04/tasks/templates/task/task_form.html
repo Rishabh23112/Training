@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}
+Task Form
+{% endblock %}
+
+{% block content %}
+
+<div class="form-container">
+
+    {% if object %}
+        <h1>Update Task</h1>
+    {% else %}
+        <h1>Create Task</h1>
+    {% endif %}
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="error">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+
+        {% for field in form %}
+
+            <div class="form-field">
+
+                {{ field.label_tag }}
+
+                {{ field }}
+
+                {% if field.errors %}
+                    <div class="error">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+
+            </div>
+
+        {% endfor %}
+
+
+        <button type="submit">
+            Save
+        </button>
+
+        <a href="{% url 'task-list' %}">
+            Cancel
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}

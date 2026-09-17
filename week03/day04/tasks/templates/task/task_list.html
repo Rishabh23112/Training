@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block title %}
+My Tasks
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <h1>My Tasks</h1>
+
+    <a
+        href="{% url 'task-create' %}"
+        class="button"
+    >
+        + Create Task
+    </a>
+
+</div>
+
+
+<form method="get" class="filter-form">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search tasks..."
+        value="{{ request.GET.search }}"
+    >
+
+    <input
+        type="date"
+        name="due_date"
+        value="{{ request.GET.due_date }}"
+    >
+
+    <button type="submit">
+        Filter
+    </button>
+
+</form>
+
+
+{% if tasks %}
+
+    <div class="task-list">
+
+        {% for task in tasks %}
+
+            <div class="task-card">
+
+                <h2>
+                    {{ task.title }}
+                </h2>
+
+                <p>
+                    {{ task.description }}
+                </p>
+
+                <p>
+                    <strong>Status:</strong>
+                    {{ task.status }}
+                </p>
+
+                {% if task.due_date %}
+                    <p>
+                        <strong>Due:</strong>
+                        {{ task.due_date }}
+                    </p>
+                {% endif %}
+
+                <div class="actions">
+
+                    <a
+                        href="{% url 'task-edit' task.pk %}"
+                    >
+                        Edit
+                    </a>
+
+                    <a
+                        href="{% url 'task-delete' task.pk %}"
+                    >
+                        Delete
+                    </a>
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+{% else %}
+
+    <p>No tasks found.</p>
+
+{% endif %}
+
+
+{% if is_paginated %}
+
+<div class="pagination">
+
+    {% if page_obj.has_previous %}
+        <a
+            href="?page={{ page_obj.previous_page_number }}"
+        >
+            Previous
+        </a>
+    {% endif %}
+
+    <span>
+        Page {{ page_obj.number }}
+        of {{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+        <a
+            href="?page={{ page_obj.next_page_number }}"
+        >
+            Next
+        </a>
+    {% endif %}
+
+</div>
+
+{% endif %}
+
+{% endblock %}
