@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if object %}
+        Edit Task
+    {% else %}
+        Create Task
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="container form-container">
+
+    <div class="form-card">
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>
+                    {% if object %}
+                        Edit Task
+                    {% else %}
+                        Create Task
+                    {% endif %}
+                </h1>
+
+                <p class="page-subtitle">
+                    {% if object %}
+                        Update your task details.
+                    {% else %}
+                        Add a new task to your list.
+                    {% endif %}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form method="post">
+
+            {% csrf_token %}
+
+
+            {% if form.non_field_errors %}
+
+                <div class="error-box">
+
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+
+            <div class="form-group">
+
+                <label for="{{ form.title.id_for_label }}">
+                    Title
+                </label>
+
+                {{ form.title }}
+
+                {% for error in form.title.errors %}
+                    <div class="field-error">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="{{ form.description.id_for_label }}">
+                    Description
+                </label>
+
+                {{ form.description }}
+
+                {% for error in form.description.errors %}
+                    <div class="field-error">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="{{ form.status.id_for_label }}">
+                        Status
+                    </label>
+
+                    {{ form.status }}
+
+                    {% for error in form.status.errors %}
+                        <div class="field-error">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="{{ form.due_date.id_for_label }}">
+                        Due Date
+                    </label>
+
+                    {{ form.due_date }}
+
+                    {% for error in form.due_date.errors %}
+                        <div class="field-error">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    {% if object %}
+                        Update Task
+                    {% else %}
+                        Create Task
+                    {% endif %}
+                </button>
+
+                <a
+                    href="{% url 'task-list' %}"
+                    class="btn btn-secondary"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

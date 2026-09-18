@@ -1,0 +1,196 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    color: #222;
+}
+
+
+.navbar {
+    margin-top: 2vh;
+    background: white;
+    padding: 15px 5%;
+    border-bottom: 1px solid #ddd;
+    border-radius: 6vh;
+    margin-left: 2vh;
+    margin-right: 2vh;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: #222;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+
+.main-content {
+    padding: 30px 5%;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+
+
+.btn {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6vh;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: #2563eb;
+    color: white;
+}
+
+.btn-secondary {
+    background: #777;
+    color: white;
+}
+
+.btn-danger {
+    background: #dc2626;
+    color: white;
+}
+
+
+.filter-card,
+.form-card,
+.task-card {
+    background: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.filter-buttons{
+    margin-top: 3vh;
+}
+
+.filter-form {
+    display: flex;
+    gap: 10px;
+}
+
+.form-control,
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 9px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.filter-field {
+    flex: 1;
+}
+
+
+.task-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.task-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.page-link {
+    padding: 7px 12px;
+    background: white;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    color: #222;
+    border-radius: 6px;
+}
+
+.page-current {
+    padding: 7px 12px;
+    background: #2563eb;
+    color: white;
+    border-radius: 6px;
+}
+
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+}
+
+
+.message {
+    margin: 15px 5%;
+    padding: 10px;
+    background: #d1fae5;
+    border-radius: 4px;
+}
+
+
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-card {
+    width: 350px;
+    background: white;
+    padding: 25px;
+    border-radius: 6px;
+}
+
+.btn-full {
+    width: 100%;
+}

@@ -1,0 +1,267 @@
+{% extends "base.html" %}
+
+{% block title %}My Tasks - Task Tracker{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="page-header">
+
+        <div>
+            <h1>My Tasks</h1>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="filter-card">
+
+        <form method="get" class="filter-form">
+
+            <div class="filter-field">
+
+                <label for="search">
+                    Search
+                </label>
+
+                <input
+                    type="text"
+                    id="search"
+                    name="q"
+                    value="{{ request.GET.q }}"
+                    placeholder="Search by title..."
+                    class="form-control"
+                >
+
+            </div>
+
+
+            <div class="filter-field">
+
+                <label for="due_date">
+                    Due Date
+                </label>
+
+                <input
+                    type="date"
+                    id="due_date"
+                    name="due_date"
+                    value="{{ request.GET.due_date }}"
+                    class="form-control"
+                >
+
+            </div>
+
+
+            <div class="filter-buttons">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Filter
+                </button>
+
+                <a
+                    href="{% url 'task-list' %}"
+                    class="btn btn-secondary"
+                >
+                    Clear
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    {% if tasks %}
+
+        <div class="task-count">
+
+            Showing
+            {{ page_obj.start_index }}-{{ page_obj.end_index }}
+            of
+            {{ page_obj.paginator.count }}
+            tasks
+
+        </div>
+
+
+
+        <div class="task-grid">
+
+            {% for task in tasks %}
+
+                <div class="task-card">
+
+                    <div class="task-header">
+
+                        <h3>
+                            {{ task.title }}
+                        </h3>
+
+                        <span
+                            class="status
+                            {% if task.status == 'Done' %}
+                                status-done
+                            {% elif task.status == 'In-Progress' %}
+                                status-progress
+                            {% else %}
+                                status-todo
+                            {% endif %}"
+                        >
+                            {{ task.status }}
+                        </span>
+
+                    </div>
+
+
+                    {% if task.description %}
+
+                        <p class="task-description">
+                            {{ task.description }}
+                        </p>
+
+                    {% else %}
+
+                        <p class="task-description muted">
+                            No description provided.
+                        </p>
+
+                    {% endif %}
+
+
+                    <div class="task-meta">
+
+                        {% if task.due_date %}
+
+                            <div>
+                                <strong>Due:</strong>
+                                {{ task.due_date }}
+                            </div>
+
+                        {% else %}
+
+                            <div>
+                                <strong>Due:</strong>
+                                No due date
+                            </div>
+
+                        {% endif %}
+
+                        <div>
+                            <strong>Created:</strong>
+                            {{ task.created_at|date:"M d, Y" }}
+                        </div>
+
+                    </div>
+
+
+                    <div class="task-actions">
+
+                        <a
+                            href="{% url 'task-edit' task.pk %}"
+                            class="btn btn-secondary"
+                        >
+                            Edit
+                        </a>
+
+                        <a
+                            href="{% url 'task-delete' task.pk %}"
+                            class="btn btn-danger"
+                        >
+                            Delete
+                        </a>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+
+
+        {% if is_paginated %}
+
+            <div class="pagination">
+
+                {% if page_obj.has_previous %}
+
+                    <a
+                        href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.due_date %}&due_date={{ request.GET.due_date }}{% endif %}"
+                        class="page-link"
+                    >
+                        First
+                    </a>
+
+                    <a
+                        href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.due_date %}&due_date={{ request.GET.due_date }}{% endif %}"
+                        class="page-link"
+                    >
+                        Previous
+                    </a>
+
+                {% endif %}
+
+
+                <span class="page-current">
+                    Page {{ page_obj.number }}
+                    of
+                    {{ page_obj.paginator.num_pages }}
+                </span>
+
+
+                {% if page_obj.has_next %}
+
+                    <a
+                        href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.due_date %}&due_date={{ request.GET.due_date }}{% endif %}"
+                        class="page-link"
+                    >
+                        Next
+                    </a>
+
+                    <a
+                        href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.due_date %}&due_date={{ request.GET.due_date }}{% endif %}"
+                        class="page-link"
+                    >
+                        Last
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        {% endif %}
+
+
+    {% else %}
+
+        <div class="empty-state">
+
+            <h2>No tasks found</h2>
+
+            <p>
+                Create your first task to get started.
+            </p>
+
+            <a
+                href="{% url 'task-create' %}"
+                class="btn btn-primary"
+            >
+                Create Task
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
