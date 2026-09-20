@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+
+{% block title %}
+My Tasks
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1>My Tasks</h1>
+
+        <p>
+            Manage your tasks from one place.
+        </p>
+    </div>
+
+    <a
+        href="{% url 'task-create' %}"
+        class="btn btn-primary"
+    >
+        + Create Task
+    </a>
+
+</div>
+
+
+<form
+    method="get"
+    class="filter-form"
+>
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search tasks..."
+        value="{{ request.GET.search }}"
+    >
+
+    <select name="status">
+
+        <option value="">
+            All Statuses
+        </option>
+
+        <option
+            value="todo"
+            {% if request.GET.status == "todo" %}
+                selected
+            {% endif %}
+        >
+            Todo
+        </option>
+
+        <option
+            value="in_progress"
+            {% if request.GET.status == "in_progress" %}
+                selected
+            {% endif %}
+        >
+            In Progress
+        </option>
+
+        <option
+            value="done"
+            {% if request.GET.status == "done" %}
+                selected
+            {% endif %}
+        >
+            Done
+        </option>
+
+    </select>
+
+
+    <input
+        type="date"
+        name="due_date"
+        value="{{ request.GET.due_date }}"
+    >
+
+    <button
+        type="submit"
+        class="btn btn-secondary"
+    >
+        Filter
+    </button>
+
+    <a
+        href="{% url 'task-list' %}"
+        class="btn btn-light"
+    >
+        Clear
+    </a>
+
+</form>
+
+
+{% if tasks %}
+
+    <div class="task-list">
+
+        {% for task in tasks %}
+
+            <div class="task-card">
+
+                <div class="task-content">
+
+                    <h2>
+                        {{ task.title }}
+                    </h2>
+
+                    {% if task.description %}
+
+                        <p>
+                            {{ task.description }}
+                        </p>
+
+                    {% else %}
+
+                        <p class="muted">
+                            No description.
+                        </p>
+
+                    {% endif %}
+
+                    <div class="task-meta">
+
+                        <span class="status status-{{ task.status }}">
+                            {{ task.get_status_display }}
+                        </span>
+
+                        {% if task.due_date %}
+
+                            <span>
+                                Due:
+                                {{ task.due_date }}
+                            </span>
+
+                        {% endif %}
+
+                        <span>
+                            Created:
+                            {{ task.created_at|date:"M d, Y" }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="task-actions">
+
+                    <a
+                        href="{% url 'task-update' task.pk %}"
+                        class="btn btn-secondary"
+                    >
+                        Edit
+                    </a>
+
+                    <a
+                        href="{% url 'task-delete' task.pk %}"
+                        class="btn btn-danger"
+                    >
+                        Delete
+                    </a>
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    {% if is_paginated %}
+
+        <div class="pagination">
+
+            {% if page_obj.has_previous %}
+
+                <a
+                    href="?page={{ page_obj.previous_page_number }}&search={{ request.GET.search }}&status={{ request.GET.status }}&due_date={{ request.GET.due_date }}"
+                >
+                    Previous
+                </a>
+
+            {% endif %}
+
+
+            <span>
+                Page {{ page_obj.number }}
+                of {{ page_obj.paginator.num_pages }}
+            </span>
+
+
+            {% if page_obj.has_next %}
+
+                <a
+                    href="?page={{ page_obj.next_page_number }}&search={{ request.GET.search }}&status={{ request.GET.status }}&due_date={{ request.GET.due_date }}"
+                >
+                    Next
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    {% endif %}
+
+
+{% else %}
+
+    <div class="empty-state">
+
+        <h2>No tasks found.</h2>
+
+        <p>
+            Create your first task to get started.
+        </p>
+
+        <a
+            href="{% url 'task-create' %}"
+            class="btn btn-primary"
+        >
+            Create Task
+        </a>
+
+    </div>
+
+{% endif %}
+
+{% endblock %}
