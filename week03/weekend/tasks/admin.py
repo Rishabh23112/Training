@@ -25,8 +25,6 @@ class TaskAdmin(admin.ModelAdmin):
         "owner__username",
     )
 
-    ordering = (
-        "-created_at",
-    )
+    ordering = ("-created_at",)
 
     list_per_page = 20

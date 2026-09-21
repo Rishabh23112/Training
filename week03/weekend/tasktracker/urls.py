@@ -23,17 +23,14 @@ urlpatterns = [
         "admin/",
         admin.site.urls,
     ),
-
     path(
         "",
         include("tasks.urls"),
     ),
-
     path(
         "api/",
         include("tasks.api.urls"),
     ),
-
     path(
         "api-auth/",
         include(
@@ -41,11 +38,8 @@ urlpatterns = [
             namespace="rest_framework",
         ),
     ),
-
     path(
         "accounts/",
-        include(
-            "django.contrib.auth.urls"
-        ),
+        include("django.contrib.auth.urls"),
     ),
 ]
