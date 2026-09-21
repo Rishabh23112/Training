@@ -1,0 +1,17 @@
+{% load custom_tags %}
+
+<div class="task-card">
+    <div class="task-card-header">
+        <h3 class="task-title">{{task.title|truncatechars:40}}</h3>
+        {{task.status|status_badge}}
+
+    </div>
+
+    <p class="task-description">{{task.description|safe|default:"No description provided."}}</p>
+
+    <div>
+        <span>Due: {{task.due_date|date:"N j, Y"}}</span>
+        <span>Priority: <strong class="priority-text">{{task.priority}}</strong></span>
+    </div>
+
+</div>
